@@ -17,10 +17,10 @@ static void ledOff() { digitalWrite(LED_PIN, HIGH); }
 
 // Human-like wander parameters. We keep the cursor roaming inside a small box
 // around wherever it started, so over hours it never drifts into a corner.
-static const int BOX_X = 60;          // max horizontal offset from origin (px)
-static const int BOX_Y = 40;          // max vertical offset from origin (px)
-static const int MIN_REST_MS = 25000; // shortest gap between jiggles
-static const int MAX_REST_MS = 75000; // longest gap (well under app idle timeouts)
+static constexpr int BOX_X = 60;          // max horizontal offset from origin (px)
+static constexpr int BOX_Y = 40;          // max vertical offset from origin (px)
+static constexpr int MIN_REST_MS = 25000; // shortest gap between jiggles
+static constexpr int MAX_REST_MS = 75000; // longest gap (well under app idle timeouts)
 
 // Net offset from the start point, so movement stays bounded inside the box.
 static int netX = 0;
@@ -28,9 +28,9 @@ static int netY = 0;
 
 // Glide smoothly to a fresh random spot inside the box, at a human-ish speed.
 static void glideToRandomSpot() {
-    int targetX = random(-BOX_X, BOX_X + 1);
-    int targetY = random(-BOX_Y, BOX_Y + 1);
-    uint32_t durationMs = random(180, 650); // a natural flick takes a fraction of a second
+    const int targetX = random(-BOX_X, BOX_X + 1);
+    const int targetY = random(-BOX_Y, BOX_Y + 1);
+    const uint32_t durationMs = random(180, 650); // a natural flick takes a fraction of a second
     bleMouse.moveTo(targetX - netX, targetY - netY, durationMs);
     netX = targetX;
     netY = targetY;
